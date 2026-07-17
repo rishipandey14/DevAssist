@@ -4,9 +4,10 @@ import { UserMapper } from "../../infrastructure/mappers/UserMapper.js";
 
 
 export class AuthController {
-    constructor({registerUser, loginUser}) {
+    constructor({registerUser, loginUser, getUser}) {
         this.registerUser = registerUser;
         this.loginUser = loginUser;
+        this.getUser = getUser;
     }
 
     register = async (req, res, next) => {
@@ -41,6 +42,23 @@ export class AuthController {
                     accessToken: result.accessToken
                 }
             })
+        } catch (error) {
+            next(error);
+        }
+    };
+
+    getMe = async (req, res, next) => {
+        try {
+            const result = await this.getUser.execute(req.user.id);
+            console.log(result);
+
+            return res.status(200).json({
+                success: true,
+                message: "User's data fetched successfully",
+                data: {
+                    user: result.user
+                }
+            });
         } catch (error) {
             next(error);
         }
