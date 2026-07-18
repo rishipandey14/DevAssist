@@ -50,7 +50,6 @@ export class AuthController {
     getMe = async (req, res, next) => {
         try {
             const result = await this.getUser.execute(req.user.id);
-            console.log(result);
 
             return res.status(200).json({
                 success: true,
