@@ -12,6 +12,8 @@ export class UserMapper {
             password: userDocument.password,
             avatar: userDocument.avatar,
             isVerified: userDocument.isVerified,
+            createdAt: userDocument.createdAt,
+            updatedAt: userDocument.updatedAt
         });
     }
 
@@ -22,6 +24,8 @@ export class UserMapper {
             email: user.email,
             avatar: user.avatar,
             isVerified: user.isVerified,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt
         }
     }
 };

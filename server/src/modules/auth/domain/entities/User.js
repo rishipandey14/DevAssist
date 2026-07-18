@@ -5,7 +5,9 @@ export class User {
         email,
         password,
         avatar,
-        isVerified
+        isVerified,
+        createdAt,
+        updatedAt
     }){
         this.id = id;
         this.name = name;
@@ -13,5 +15,7 @@ export class User {
         this.password = password;
         this.avatar = avatar;
         this.isVerified = isVerified;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 };
