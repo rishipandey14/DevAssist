@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import { User } from "../../domain/entities/User.js";
 import { generateAccessToken } from "../../../../shared/utils/jwt.js";
+import { APIError } from "../../../../config/error.js";
 
 
 
@@ -13,7 +14,7 @@ export class RegisterUser {
         // check if mail already exist
         const existingUser = await this.userRepository.findByEmail(dto.email);
 
-        if(existingUser) throw new Error(`User ${dto.email} already exists`);
+        if(existingUser) throw new APIError(`User already exists`, 409)
 
         // hash password
         const hashedPassword = await bcrypt.hash(dto.password, 12);

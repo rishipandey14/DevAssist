@@ -10,6 +10,6 @@ export const authRoute = express.Router();
 
 
 authRoute.post("/register", validate(RegisterSchema), authController.register);
-authRoute.get("/login", validate(LoginSchema), authController.login);
+authRoute.post("/login", validate(LoginSchema), authController.login);
 authRoute.get("/me", authMiddleware, authController.getMe)
 
