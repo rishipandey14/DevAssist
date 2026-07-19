@@ -4,6 +4,7 @@ import { authRoute } from "./src/modules/auth/presentation/routes/auth.routes.js
 import { endpointRoute } from "./src/modules/endpoints/presentation/routes/endpoint.route.js";
 import { generateOpenAPIDocument } from "./src/config/swagger/generate.js";
 import { errorHandler } from "./src/shared/middlewares/error.middleware.js";
+import "./src/config/swagger/registerDocs.js";
 
 export const app = express();
 app.use(express.json());
