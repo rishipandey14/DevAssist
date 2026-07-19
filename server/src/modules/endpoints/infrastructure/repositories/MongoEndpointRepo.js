@@ -18,4 +18,9 @@ export class mongoEndpointRepository extends IEndpointRepository {
     async findBySlug(slug) {
         return await Endpoint.findOne({slug: slug})
     }
+
+    async findByUserId(userId) {
+        const result = await Endpoint.find({userId});
+        return result;
+    } 
 };
