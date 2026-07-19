@@ -1,7 +1,5 @@
 export class IUserRepository {
-    async create(user) {
-        throw new Error("Method create() must be implemented");
-    }
+    async create(user) {}
     
     async findByEmail(eamil){}
     
