@@ -1,7 +1,7 @@
 import { APIError } from "../../../../config/error.js";
 
 
-export class GetEndpoints {
+export class GetEndpointsListing {
     constructor(endpointRepository) {
         this.endpointRepository = endpointRepository
     }

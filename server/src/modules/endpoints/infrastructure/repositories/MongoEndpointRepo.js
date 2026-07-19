@@ -23,4 +23,9 @@ export class mongoEndpointRepository extends IEndpointRepository {
         const result = await Endpoint.find({userId});
         return result;
     } 
+
+    async findById(id) {
+        const result = await Endpoint.findById(id);
+        return result;
+    }
 };

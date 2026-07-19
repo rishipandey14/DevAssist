@@ -6,5 +6,6 @@ import { authMiddleware } from "../../../auth/presentation/middlewares/auth.midd
 
 export const endpointRoute = express.Router();
 
-endpointRoute.post("/endpoint", authMiddleware, validate(CreateEndpointSchema), endpointController.create);
-endpointRoute.get("/endpoint", authMiddleware, endpointController.endpointListing);
+endpointRoute.post("/endpoints", authMiddleware, validate(CreateEndpointSchema), endpointController.create);
+endpointRoute.get("/endpoints", authMiddleware, endpointController.endpointListing);
+endpointRoute.get("/endpoints/:endpointId", authMiddleware, endpointController.fetchEndpoint);

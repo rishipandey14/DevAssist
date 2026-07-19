@@ -3,9 +3,10 @@ import { EndpointDTO } from "../../application/dto/EndpointDTO.js";
 
 
 export class EndpointController {
-    constructor({createEndpoint, GetEndpointListing}) {
+    constructor({createEndpoint, getEndpointListing, getEndpoint}) {
         this.createEndpoint = createEndpoint,
-        this.GetEndpointListing = GetEndpointListing
+        this.getEndpointListing = getEndpointListing,
+        this.getEndpoint = getEndpoint
     }
 
     create = async (req, res, next) => {
@@ -28,11 +29,28 @@ export class EndpointController {
 
     endpointListing = async (req, res, next) => {
         try {
-            const result = await this.GetEndpointListing.execute(req.user.id);
+            const result = await this.getEndpointListing.execute(req.user.id);
 
             return res.status(200).json({
                 success: true,
                 message: "Endpoints fetched successfully",
+                data: {
+                    result
+                }
+            })
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    fetchEndpoint = async (req, res, next) => {
+        try {
+            const endpointId = req.params.endpointId;
+            const result = await this.getEndpoint.execute(endpointId);
+
+            return res.status(200).json({
+                success: true,
+                message: "Endpoint fetched successfully",
                 data: {
                     result
                 }
