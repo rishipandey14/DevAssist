@@ -2,7 +2,7 @@ import express from "express";
 import { validate } from "../../../../shared/middlewares/validate.middleware.js";
 import { CreateEndpointSchema } from "../../application/schema/CreateEndpoint.schema.js";
 import { endpointController } from "../../endpoint.container.js";
-import { authMiddleware } from "../../../auth/presentation/middlewares/auth.middleware.js";
+import { authMiddleware } from "../../../../shared/middlewares/auth.middleware.js";
 
 export const endpointRoute = express.Router();
 
