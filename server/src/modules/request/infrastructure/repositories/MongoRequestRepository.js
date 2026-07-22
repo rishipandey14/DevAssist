@@ -2,6 +2,40 @@ import { IRequestRepository } from "../../domain/Repository/IRequestRepository.j
 import { Request } from "../models/request.js";
 
 export class MongoRequestRepository extends IRequestRepository {
+    
+    buildQuery(endpointId, filters, search) {
+        const query = {
+            endpointId,
+            ...filters,
+        };
+
+        if (search) {
+            query.$or = [
+                {
+                    path: {
+                        $regex: search,
+                        $options: "i",
+                    },
+                },
+                {
+                    method: {
+                        $regex: search,
+                        $options: "i",
+                    },
+                },
+                {
+                    contentType: {
+                        $regex: search,
+                        $options: "i",
+                    },
+                },
+            ];
+        }
+
+        return query;
+    }
+
+    
     async captureRequest(request) {
         return await Request.create({
             endpointId: request.endpointId,
@@ -20,15 +54,14 @@ export class MongoRequestRepository extends IRequestRepository {
 
 
     async findByEndpoint(endpointId, options) {
-        const { pagination, filters } = options;
-        const { skip, limit } = pagination;
+        const { pagination, filters, sorting, search } = options;
 
-        const query = {endpointId, ...filters};
+        const query = this.buildQuery(endpointId, filters, search);
 
         const requests = await Request.find(query)
-            .sort({receivedAt : -1})
-            .skip(skip)
-            .limit(limit);
+            .sort(sorting)
+            .skip(pagination.skip)
+            .limit(pagination.limit);
         
         const total = await Request.countDocuments(query);
 

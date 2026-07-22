@@ -1,6 +1,8 @@
 import { APIError } from "../../../../config/error.js";
 import { getRequestFilters } from "../../../../shared/utils/filters.js";
 import { getPagination } from "../../../../shared/utils/pagination.js"
+import { getSearch } from "../../../../shared/utils/search.js";
+import { getSorting } from "../../../../shared/utils/sorting.js";
 
 export class RequestController {
     constructor({captureRequest, endpointResolver, getEndpointRequests, getRequest}) {
@@ -43,10 +45,14 @@ export class RequestController {
         try {
             const pagination = getPagination(req.query);
             const filters = getRequestFilters(req.query);
+            const sorting = getSorting(req.query);
+            const search = getSearch(req.query);
             
             const result = await this.getEndpointRequests.execute(req.params.endpointId, {
                 pagination,
                 filters,
+                sorting,
+                search,
             });
 
             return res.status(200).json({
