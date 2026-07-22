@@ -1,12 +1,18 @@
+import { buildPagination } from "../../../../shared/utils/pagination.js";
+
 export class GetEndpointRequests {
     constructor(requestRepository) {
         this.requestRepository = requestRepository;
     }
 
-    async execute(endpointId) {
-        const requests = await this.requestRepository.findByEndpoint(endpointId);
+    async execute(endpointId, pagination) {
+        const { requests, total } =
+            await this.requestRepository.findByEndpoint(
+                endpointId,
+                pagination
+            );
 
-        return requests.map((request) => ({
+        const data = requests.map((request) => ({
             id: request._id,
             method: request.method,
             path: request.path,
@@ -15,5 +21,14 @@ export class GetEndpointRequests {
             receivedAt: request.receivedAt,
             ip: request.ip,
         }));
+
+        return {
+            data,
+            pagination: buildPagination(
+                pagination.page,
+                pagination.limit,
+                total
+            ),
+        };
     }
 }

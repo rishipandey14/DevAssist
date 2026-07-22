@@ -1,4 +1,5 @@
 import { APIError } from "../../../../config/error.js";
+import { getPagination } from "../../../../shared/utils/pagination.js"
 
 export class RequestController {
     constructor({captureRequest, endpointResolver, getEndpointRequests, getRequest}) {
@@ -39,11 +40,13 @@ export class RequestController {
 
     endpointRequests = async (req, res, next) => {
         try {
-            const requests = await this.getEndpointRequests.execute(req.params.endpointId);
+            const pagination = getPagination(req.query);
+            
+            const result = await this.getEndpointRequests.execute(req.params.endpointId, pagination);
 
             return res.status(200).json({
                 success: true,
-                data: requests
+                data: result
             })
         } catch (error) {
             next(error);
