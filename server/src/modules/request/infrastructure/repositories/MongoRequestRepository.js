@@ -17,4 +17,10 @@ export class MongoRequestRepository extends IRequestRepository {
             bodySize: request.bodySize,
         });
     }
+
+
+    async findByEndpoint(endpointId) {
+        return await Request.find({endpointId}).sort({receivedAt : -1});
+    }
+
 }

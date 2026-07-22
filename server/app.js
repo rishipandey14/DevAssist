@@ -4,6 +4,7 @@ import swaggerUi from "swagger-ui-express"
 import { authRoute } from "./src/modules/auth/presentation/routes/auth.routes.js";
 import { endpointRoute } from "./src/modules/endpoints/presentation/routes/endpoint.route.js";
 import { webhookRoute } from "./src/modules/request/presentation/route/webhook.route.js";
+import { requestRoute } from "./src/modules/request/presentation/route/request.route.js";
 
 import { generateOpenAPIDocument } from "./src/config/swagger/generate.js";
 import { errorHandler } from "./src/shared/middlewares/error.middleware.js";
@@ -38,7 +39,7 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
  */
 app.use("/api/auth", authRoute);
 app.use("/api", endpointRoute);
-// app.use("/api", requestRoute);
+app.use("/api", requestRoute);
 
 
 /**
