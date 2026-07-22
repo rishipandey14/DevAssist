@@ -19,15 +19,18 @@ export class MongoRequestRepository extends IRequestRepository {
     }
 
 
-    async findByEndpoint(endpointId, pagination) {
-        const {skip, limit} = pagination;
+    async findByEndpoint(endpointId, options) {
+        const { pagination, filters } = options;
+        const { skip, limit } = pagination;
 
-        const requests = await Request.find({endpointId})
+        const query = {endpointId, ...filters};
+
+        const requests = await Request.find(query)
             .sort({receivedAt : -1})
             .skip(skip)
             .limit(limit);
         
-        const total = await Request.countDocuments({endpointId});
+        const total = await Request.countDocuments(query);
 
         return {
             requests,

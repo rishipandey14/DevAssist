@@ -5,12 +5,9 @@ export class GetEndpointRequests {
         this.requestRepository = requestRepository;
     }
 
-    async execute(endpointId, pagination) {
-        const { requests, total } =
-            await this.requestRepository.findByEndpoint(
-                endpointId,
-                pagination
-            );
+    async execute(endpointId, options) {
+        const { pagination } = options;
+        const { requests, total } = await this.requestRepository.findByEndpoint(endpointId, options);
 
         const data = requests.map((request) => ({
             id: request._id,

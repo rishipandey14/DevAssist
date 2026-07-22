@@ -3,7 +3,7 @@ export class IRequestRepository {
     async captureRequest(request) {}
 
     // get the list of request for particular endpoint
-    async findByEndpoint(endpointId, pagination) {}
+    async findByEndpoint(endpointId, options) {}
 
     // get the reuest info 
     async findById(requestId) {}
