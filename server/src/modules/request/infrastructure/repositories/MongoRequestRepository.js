@@ -23,4 +23,7 @@ export class MongoRequestRepository extends IRequestRepository {
         return await Request.find({endpointId}).sort({receivedAt : -1});
     }
 
+    async findById(requestId) {
+        return await Request.findById(requestId);
+    }
 }

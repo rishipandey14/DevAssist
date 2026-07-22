@@ -5,3 +5,4 @@ import { authMiddleware } from "../../../../shared/middlewares/auth.middleware.j
 export const requestRoute = express.Router();
 
 requestRoute.get("/endpoints/:endpointId/requests", authMiddleware, requestController.endpointRequests);
+requestRoute.get("/requests/:requestId", authMiddleware, requestController.getRequestInfo);

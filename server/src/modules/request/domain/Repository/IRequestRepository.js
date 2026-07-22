@@ -4,4 +4,7 @@ export class IRequestRepository {
 
     // get the list of request for particular endpoint
     async findByEndpoint(endpointId) {}
+
+    // get the reuest info 
+    async findById(requestId) {}
 };

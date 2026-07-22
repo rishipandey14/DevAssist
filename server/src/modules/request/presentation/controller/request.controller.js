@@ -1,10 +1,11 @@
 import { APIError } from "../../../../config/error.js";
 
 export class RequestController {
-    constructor({captureRequest, endpointResolver, getEndpointRequests}) {
+    constructor({captureRequest, endpointResolver, getEndpointRequests, getRequest}) {
         this.endpointResolver = endpointResolver;
         this.captureRequest = captureRequest;
         this.getEndpointRequests = getEndpointRequests;
+        this.getRequest = getRequest;
     }
 
     capture = async (req, res, next) => {
@@ -44,6 +45,19 @@ export class RequestController {
                 success: true,
                 data: requests
             })
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    getRequestInfo = async (req, res, next) => {
+        try {
+            const request = await this.getRequest.execute(req.params.requestId);
+
+            return res.status(200).json({
+                success: true,
+                data: request
+            });
         } catch (error) {
             next(error);
         }
