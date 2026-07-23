@@ -6,3 +6,4 @@ import { analyticsController } from "../../analytics.container.js";
 export const analyticsRouter = express.Router();
 
 analyticsRouter.get("/dashboard", authMiddleware, analyticsController.getDashboardData);
+analyticsRouter.get("/endpoints/:endpointId/analytics", authMiddleware, analyticsController.getEndpointAnalyticsData);

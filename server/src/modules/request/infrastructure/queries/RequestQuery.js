@@ -1,4 +1,5 @@
 import { Request } from "../models/request.js";
+import mongoose from "mongoose";
 
 export class RequestQuery {
     async countByEndpointIds (endpointIds) {
@@ -58,4 +59,77 @@ export class RequestQuery {
         ]);
     }
 
+    async getMethodsStats (endpointId) {
+        const objectId = new mongoose.Types.ObjectId(endpointId);
+
+        return Request.aggregate([
+            {
+                $match: { 
+                    endpointId: objectId,
+                },
+            },
+            {
+                $group: {
+                    _id: "$method",
+
+                    count: { $sum: 1 },
+                },
+            }
+        ]);
+    }
+
+    async getContentTypeStats (endpointId) {
+        const objectId = new mongoose.Types.ObjectId(endpointId);
+
+        return Request.aggregate([
+            {
+                $match: { endpointId: objectId, },
+            },
+            {
+                $group: {
+                    _id: "$contentType",
+
+                    count: { $sum: 1 },
+                },
+            }
+        ]);
+    }
+    
+    async getLast7DaysRequests (endpointId) {
+        const tillTime = new Date();
+        const fromTime = new Date();
+
+        fromTime.setDate(fromTime.getDate() - 6);
+        fromTime.setHours(0,0,0,0);
+
+        const objectId = new mongoose.Types.ObjectId(endpointId);
+
+        return Request.aggregate([
+            {
+                $match: {
+                    endpointId: objectId,
+                    receivedAt : {
+                        $gte: fromTime,
+                        $lte: tillTime,
+                    },
+                },
+            },
+            {
+                $group: {
+                    _id: {
+                        $dateToString: {
+                            format: "%Y-%m-%d",
+                            date: "$receivedAt",
+                        },
+                    },
+                    count: {
+                        $sum: 1,
+                    }
+                }
+            },
+            {
+                $sort: { _id: 1 }
+            }
+        ]);
+    }
 };

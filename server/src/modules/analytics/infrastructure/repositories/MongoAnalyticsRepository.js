@@ -35,4 +35,28 @@ export class MongoAnalyticsRepository extends IAnalyticsRepository {
         };
     }
 
+
+    async getEndpointAnalytics(endpointId) {
+        const [
+            totalRequests,
+            requestsToday,
+            methods,
+            contentTypes,
+            last7days,
+        ] = await Promise.all([
+            this.requestQuery.countByEndpointIds(endpointId),
+            this.requestQuery.getTodayRequestCount(endpointId),
+            this.requestQuery.getMethodsStats(endpointId),
+            this.requestQuery.getContentTypeStats(endpointId),
+            this.requestQuery.getLast7DaysRequests(endpointId),
+        ]);
+
+        return {
+            totalRequests,
+            requestsToday,
+            methods,
+            contentTypes,
+            last7days,
+        }
+    }
 }
