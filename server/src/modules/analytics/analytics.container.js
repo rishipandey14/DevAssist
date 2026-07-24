@@ -5,6 +5,10 @@ import { GetDashboardAnalytics } from "./application/useCase/GetDashboardAnalyti
 import { GetEndpointAnalytics } from "./application/useCase/GetEndpointAnalytics.js"
 import { MongoAnalyticsRepository } from "./infrastructure/repositories/MongoAnalyticsRepository.js";
 import { AnalyticsController } from "./presentation/controller/analytics.controller.js";
+import { getOwnedEndpoint } from "../endpoints/endpoint.container.js";
+
+
+
 
 // Queries
 const endpointQuery = new EndpointQuery();
@@ -15,7 +19,7 @@ const analyticsRepository = new MongoAnalyticsRepository(endpointQuery, requestQ
 
 // use Cases
 const getDashboardAnalytics = new GetDashboardAnalytics(analyticsRepository);
-const getEndpointAnalytics = new GetEndpointAnalytics(analyticsRepository);
+const getEndpointAnalytics = new GetEndpointAnalytics({analyticsRepository, getOwnedEndpoint});
 
 // Controller
 export const analyticsController = new AnalyticsController(getDashboardAnalytics, getEndpointAnalytics);

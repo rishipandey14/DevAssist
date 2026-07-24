@@ -23,7 +23,7 @@ export class AnalyticsController {
 
     getEndpointAnalyticsData = async (req, res, next) => {
         try {
-            const result = await this.getEndpointAnalytics.execute(req.params.endpointId);
+            const result = await this.getEndpointAnalytics.execute(req.user.id, req.params.endpointId);
 
             return res.status(200).json({
                 success: true,

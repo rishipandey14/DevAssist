@@ -48,7 +48,7 @@ export class RequestController {
             const sorting = getSorting(req.query);
             const search = getSearch(req.query);
             
-            const result = await this.getEndpointRequests.execute(req.params.endpointId, {
+            const result = await this.getEndpointRequests.execute(req.user.id, req.params.endpointId, {
                 pagination,
                 filters,
                 sorting,

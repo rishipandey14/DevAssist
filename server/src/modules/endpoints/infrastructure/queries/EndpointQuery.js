@@ -8,4 +8,8 @@ export class EndpointQuery {
     async findIdsByUser(userId) {
         return Endpoint.find({userId}, "_id");
     }
+
+    async findById(endpointId) {
+        return Endpoint.findById(endpointId);
+    }
 };

@@ -4,7 +4,14 @@ import { GetEndpointsListing } from "./application/useCases/GetEndpointListing.j
 import { GetEndpoint } from "./application/useCases/getEndpoint.js";
 import { EndpointController } from "./presentation/controller/endpoint.controller.js";
 import { EndpointResolver } from "../../shared/services/EndpointResolver.js";
+import { EndpointQuery } from "./infrastructure/queries/EndpointQuery.js";
+import { GetOwnedEndpoint } from "./application/useCases/GetOwnedEndpoint.js";
 
+
+// query
+const endpointQuery = new EndpointQuery();
+
+export const getOwnedEndpoint = new GetOwnedEndpoint(endpointQuery);
 
 const repository = new mongoEndpointRepository();
 
