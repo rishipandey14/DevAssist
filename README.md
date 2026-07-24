@@ -1,152 +1,198 @@
 # 🚀 DevAssist
 
-> An open-source developer productivity platform for building, testing, monitoring, and documenting APIs.
+> A developer-first webhook testing and API debugging platform built with **Node.js**, **Express.js**, and **MongoDB**, following a **Module-Based Clean Architecture**.
+
+DevAssist enables developers to create custom webhook endpoints, inspect incoming HTTP requests, analyze traffic, and debug integrations through a secure, scalable, and production-oriented backend.
+
+Unlike simple CRUD projects, DevAssist focuses on **software architecture**, **maintainability**, and **backend engineering best practices**.
 
 ---
 
-## 📖 Overview
+## ✨ Features
 
-DevAssist is a full-stack platform designed to help software developers create and manage APIs with powerful tooling around them.
+### 🔐 Authentication
 
-The project is being built using **Clean Architecture**, **SOLID Principles**, and modern backend engineering practices.
+- User Registration
+- User Login
+- JWT Authentication
+- Get Current User
 
-This repository serves both as a production-ready application and a learning resource for scalable software architecture.
+### 🌐 Endpoint Management
+
+- Create Webhook Endpoints
+- Update Endpoints
+- Delete Endpoints
+- Endpoint Ownership Authorization
+
+### 📨 Request Capture
+
+- Capture Incoming Webhooks
+- Store Headers
+- Store Body
+- Store HTTP Method
+- Store Content-Type
+- Store Client IP
+- Store Timestamp
+
+### 📊 Analytics
+
+- Dashboard Analytics
+- Endpoint Analytics
+- Request Trends
+- HTTP Method Distribution
+- Content-Type Distribution
+
+### 🛠 Developer Experience
+
+- Swagger/OpenAPI
+- Zod Validation
+- Pagination
+- Search
+- Filtering
+- Sorting
+- Centralized Error Handling
 
 ---
 
-## ✨ Current Status
+# 🏗️ Architecture
 
-**Phase:** Phase 0 (In Progress)
-
-### Completed
-
-- ✅ Backend project setup
-- ✅ Clean Architecture
-- ✅ User Registration API
-- ✅ JWT Authentication (Registration)
-- ✅ Zod Validation
-- ✅ OpenAPI (Swagger)
-- ✅ MongoDB Integration
-
-### Upcoming
-
-- 🔜 Login API
-- 🔜 Refresh Token
-- 🔜 Endpoint Management
-- 🔜 Request Tracking
-- 🔜 Analytics Dashboard
-- 🔜 Redis Cache
-- 🔜 Queue System
-- 🔜 AI Documentation Generator
-
----
-
-# 🏗 Architecture
-
-The backend follows **Clean Architecture**.
+DevAssist follows a **Module-Based Clean Architecture**, where every feature owns its presentation, application, domain, and infrastructure layers.
 
 ```
-Presentation
-      │
-      ▼
-Application
-      │
-      ▼
-Domain
-      ▲
-      │
-Infrastructure
+Client
+   │
+   ▼
+Express Server
+   │
+   ▼
+Feature Module
+   │
+   ▼
+Use Case
+   │
+   ▼
+Repository / Query
+   │
+   ▼
+MongoDB
 ```
 
-Read more:
+📖 Read the complete architecture guide:
 
-- docs/architecture/high-level.md
+➡️ **[docs/architecture.md](docs/architecture.md)**
 
 ---
 
-# 📂 Project Structure
+# 📂 Documentation
 
-```
-devassist/
+| Document | Description |
+|----------|-------------|
+| 📖 [Architecture](docs/architecture.md) | Module-Based Clean Architecture, Dependency Injection, Request Lifecycle |
+| 📑 [API Reference](docs/api-reference.md) | Complete API Documentation |
+| 🗂️ [Folder Structure](docs/folder-structure.md) | Detailed explanation of every folder |
+| 🗄️ [Database Design](docs/database.md) | Collections, Relationships, ER Diagram |
+| 🚀 [Roadmap](docs/roadmap.md) | Completed features and future plans |
 
-├── backend/
+---
 
-├── frontend/
+# 🚀 Getting Started
 
-├── docs/
+## Clone Repository
 
-└── README.md
+```bash
+git clone https://github.com/<your-username>/devAssist.git
+
+cd devAssist
 ```
 
 ---
 
-# 🛠 Tech Stack
+## Install Dependencies
 
-## Backend
+```bash
+npm install
+```
 
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- Zod
-- JWT
-- Swagger / OpenAPI
+---
 
-## Planned
+## Configure Environment Variables
 
+Create a `.env` file.
+
+```env
+PORT=8030
+
+MONGODB_URI=mongodb://localhost:27017/devAssist
+
+JWT_SECRET=your-secret-key
+
+JWT_EXPIRES_IN=7d
+```
+
+---
+
+## Run Development Server
+
+```bash
+npm run dev
+```
+
+Server runs at
+
+```
+http://localhost:8030
+```
+
+---
+
+# 📚 Swagger Documentation
+
+```
+http://localhost:8030/docs
+```
+
+Swagger provides:
+
+- Request Schemas
+- Response Schemas
+- Authentication
+- API Playground
+
+---
+
+# 🛣️ Roadmap
+
+Current Progress
+
+- ✅ Authentication
+- ✅ Endpoint Management
+- ✅ Request Capture
+- ✅ Dashboard Analytics
+- ✅ Endpoint Analytics
+- ✅ Swagger Documentation
+
+Upcoming
+
+- Request Replay
+- API Keys
+- Queue Processing
 - Redis
-- BullMQ
 - Docker
-- Prometheus
-- Grafana
-- RabbitMQ
-- GitHub Actions
-
----
-
-# 📚 Documentation
-
-Project documentation is located inside
-
-```
-docs/
-```
-
-including
-
-- Architecture
-- API Documentation
-- Mermaid Diagrams
-- ADRs
-- Roadmaps
-
----
-
-# 🎯 Goals
-
-The purpose of DevAssist is to learn and implement production-grade backend engineering concepts including:
-
-- Clean Architecture
-- SOLID Principles
-- Design Patterns
-- Authentication & Authorization
-- API Design
-- Documentation Automation
 - Monitoring
-- Caching
-- Background Processing
-- Distributed Systems Concepts
+- Rate Limiting
+
+See the complete roadmap:
+
+➡️ **[docs/roadmap.md](docs/roadmap.md)**
 
 ---
 
 # 🤝 Contributing
 
-Contributions are welcome.
-
-Please open an issue before submitting major changes.
+Contributions, issues, and feature requests are welcome.
 
 ---
 
 # 📄 License
 
-MIT License
+MIT License.
