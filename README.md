@@ -100,7 +100,7 @@ MongoDB
 ## Clone Repository
 
 ```bash
-git clone https://github.com/<your-username>/devAssist.git
+git clone https://github.com/rishipandey14/DevAssist.git
 
 cd devAssist
 ```
@@ -119,15 +119,6 @@ npm install
 
 Create a `.env` file.
 
-```env
-PORT=8030
-
-MONGODB_URI=mongodb://localhost:27017/devAssist
-
-JWT_SECRET=your-secret-key
-
-JWT_EXPIRES_IN=7d
-```
 
 ---
 
@@ -140,7 +131,7 @@ npm run dev
 Server runs at
 
 ```
-http://localhost:8030
+http://localhost:<your-port>
 ```
 
 ---
@@ -148,7 +139,7 @@ http://localhost:8030
 # 📚 Swagger Documentation
 
 ```
-http://localhost:8030/docs
+http://localhost:<your-port>/docs
 ```
 
 Swagger provides:
